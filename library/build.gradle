@@ -1,0 +1,41 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.2"
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 30
+        versionCode 1
+        versionName "0.0.1"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    libraryVariants.all { variant ->
+        if (variant.buildType.name == 'release') {
+            variant.getAssembleProvider().get().doLast {
+                def fileName = "${rootProject.name}-${defaultConfig.versionName}"
+                def outputPath = "../output/"
+                def outputFile = "build/intermediates/aar_main_jar/release/classes.jar"
+                copy {
+                    from outputFile
+                    into outputPath
+                    rename { fileName + ".jar" }
+                }
+            }
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+
+}
