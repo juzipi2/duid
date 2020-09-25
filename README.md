@@ -10,7 +10,8 @@
   * 如果imei跟mac都获取失败，仍然使用android_id。
 - 如果以上方法都失败，通过UUID随机。
 ### 下载
-[历史版本](DOWNLOAD.md)
+- [v0.0.2](https://bintray.com/juzipi2/maven/download_file?file_path=duid-0.0.2.jar)
+- [历史版本](DOWNLOAD.md)
 ### 用法
 ``` groovy
 String duid = DUID.getDUID(context);
